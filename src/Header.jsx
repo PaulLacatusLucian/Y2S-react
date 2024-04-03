@@ -3,7 +3,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import logo from './Icon.png';
-import './Header.css'; // Importă fișierul CSS pentru stilizare
+import './Header.css'; 
 
 function Header() {
 
@@ -30,14 +30,14 @@ function Header() {
     };
 
     const h2Style = {
-        fontSize: '50px', // Mărimea fontului pentru h2
-        textAlign: 'center', // Aliniere text în centru
-        textTransform: 'uppercase', // Transformă textul în majuscule
-        lineHeight: '1.5', // Spațierea între linii pentru o prezentare mai bună
-        margin: '0', // Elimină marginile implicite
+        fontSize: '50px', 
+        textAlign: 'center', 
+        textTransform: 'uppercase',
+        lineHeight: '1.5',
+        margin: '0',
         paddingTop: '150px',
         color: "white",
-        fontFamily: 'Sans-serif', // Specifică familia de fonturi
+        fontFamily: 'Sans-serif',
         fontWeight: 'bold', 
     };
 
