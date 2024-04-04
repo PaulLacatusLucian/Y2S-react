@@ -5,41 +5,43 @@ function StepsCard(props) {
   const [isHovered, setIsHovered] = useState(false);
 
   const smallImgStyle = {
-    width: '100px',
-    height: '100px', 
+    width: '80px',
+    height: '80px', 
     margin: 'auto' 
   }
-
+  
+  const borderColor = props.color;
   const cardStyle = {
     width: '20rem',
     borderRadius: '30px',
-    borderColor: '#119e3e', 
-    transition: 'transform 0.3s ease, border-width 0.3s ease', // Adaugă tranziție pentru transformare și grosimea border-ului
-    borderWidth: isHovered ? '5px' : '1px', // Setează grosimea border-ului în funcție de starea hover
+    borderColor: borderColor, 
+    transition: 'transform 0.3s ease, border-width 0.3s ease',
+    borderWidth: isHovered ? '5px' : '1px',
     transform: isHovered ? 'scale(1.05)' : 'scale(1)',
   };
 
     const largeImgStyle = {
+        marginTop: '15px', 
         width: '100%',
         borderRadius: '50px',
     }
 
   return (
     <Card 
-      className={isHovered ? 'zoom-in' : ''} // Adaugă clasă pentru animația de zoom-in când este activat hover-ul
+      className={isHovered ? 'zoom-in' : ''}
       style={cardStyle}
-      onMouseEnter={() => setIsHovered(true)} // Activează hover-ul când mouse-ul intră pe card
-      onMouseLeave={() => setIsHovered(false)} // Dezactivează hover-ul când mouse-ul iese de pe card
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <Card.Img 
         variant="top" 
         src={props.imgSource} 
-        style={smallImgStyle} // Aplică stilurile pentru imaginea mică
+        style={smallImgStyle}
       />
       <Card.Body>
         <Card.Title 
           className={isHovered ? 'card-title hovered' : 'card-title'} 
-          style={{textAlign: 'center'}} // Aliniază textul la centru
+          style={{textAlign: 'center'}}
         >
           {props.title}
         </Card.Title>

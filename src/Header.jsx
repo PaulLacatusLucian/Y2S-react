@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
-import logo from './Icon.png';
-import background from './background.jpg';
+import logo from './assets/Icon.png';
+import background from './assets/background.jpg';
 import './Header.css'; 
 
 function Header() {
@@ -22,7 +22,7 @@ function Header() {
         position: 'fixed',
         width: '100%',
         zIndex: '1000',
-        backgroundColor: menuOpen ? '#101010' : navBackground, // Verifică dacă meniul este deschis și setează culoarea corespunzătoare
+        backgroundColor: menuOpen ? '#101010' : navBackground,
         transition: 'background-color 0.3s ease',
     };
 
@@ -39,8 +39,8 @@ function Header() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        minHeight: '500px', // Înălțime minimă pentru a asigura vizibilitatea conținutului
-        padding: '50px 0 20px', // Spatierea între conținut și marginile headerului, 20px margin-top adăugat
+        minHeight: '500px', 
+        padding: '50px 0 20px', 
     };
 
     const h2Style = {
