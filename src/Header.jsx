@@ -3,11 +3,13 @@ import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import logo from './Icon.png';
+import background from './background.jpg';
 import './Header.css'; 
 
 function Header() {
 
     const [navBackground, setNavBackground] = useState('transparent');
+    const [menuOpen, setMenuOpen] = useState(false);
 
     const logoStyle = {
         maxHeight: '50px', 
@@ -20,13 +22,25 @@ function Header() {
         position: 'fixed',
         width: '100%',
         zIndex: '1000',
-        backgroundColor: navBackground,
+        backgroundColor: menuOpen ? '#101010' : navBackground, // Verifică dacă meniul este deschis și setează culoarea corespunzătoare
         transition: 'background-color 0.3s ease',
     };
 
     const headerStyle = {
         backgroundColor: '#343a40',
-        height: '500px', 
+        backgroundImage: `url(${background})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        position: 'relative',
+    };
+
+    const contentStyle = {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '500px', // Înălțime minimă pentru a asigura vizibilitatea conținutului
+        padding: '50px 0 20px', // Spatierea între conținut și marginile headerului, 20px margin-top adăugat
     };
 
     const h2Style = {
@@ -35,7 +49,6 @@ function Header() {
         textTransform: 'uppercase',
         lineHeight: '1.5',
         margin: '0',
-        paddingTop: '150px',
         color: "white",
         fontFamily: 'Sans-serif',
         fontWeight: 'bold', 
@@ -48,8 +61,12 @@ function Header() {
         if (currentScrollPos < changePoint) {
             setNavBackground('transparent');
         } else {
-            setNavBackground('#212529');
+            setNavBackground('#101010');
         }
+    };
+
+    const toggleMenu = () => {
+        setMenuOpen(!menuOpen);
     };
 
     useEffect(() => {
@@ -67,7 +84,7 @@ function Header() {
                         <img style={logoStyle} src={logo} alt="Site Logo"></img>
                         YoutubeToSpotify
                     </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Toggle onClick={toggleMenu} aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                         <Nav>
                             <Nav.Link href="#home">Home</Nav.Link>
@@ -77,8 +94,10 @@ function Header() {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <h2 style={h2Style}>Transfer your music from <br></br> YouTube to Spotify</h2>
-            <button className="button">Try it out now</button>
+            <div style={contentStyle}>
+                <h2 style={h2Style}>Transfer your music from <br /> YouTube to Spotify</h2>
+                <button className="button">Try it out now</button>
+            </div>
         </header>
     );
 }
