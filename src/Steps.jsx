@@ -1,10 +1,11 @@
 import StepsCard from './Card';
 import stepOne from './assets/1.png';
-import stepsContent1 from './assets/stepsContent1.png';
+import Lottie from 'lottie-react'
+import stepContent1 from './assets/connection.json'
 import stepTwo from './assets/2.png';
-import stepsContent2 from './assets/stepsContent2.png';
+import stepsContent2 from './assets/pick.json';
 import stepThree from './assets/3.png';
-import stepsContent3 from './assets/stepsContent3.png';
+import stepsContent3 from './assets/ready.json';
 
 function Steps() {
     const containerStyle = {
@@ -22,21 +23,22 @@ function Steps() {
             <div style={containerStyle}>
                 <StepsCard
                     color='#129e3d'
+                    // imgSource={stepOne}
                     imgSource={stepOne}
                     title="Link your YouTube and Spotify accounts, and authorize YoutubeToSpotify."
-                    imgSource2={stepsContent1}
+                    animationData={stepContent1}
                 />
                 <StepsCard
                     color='#101010'
                     imgSource={stepTwo}
                     title="Select which playlist from your Youtube ones you would like to transfer"
-                    imgSource2={stepsContent2}
+                    animationData={stepsContent2}
                 />
                 <StepsCard
                     color='#d40b0b'
                     imgSource={stepThree}
                     title="Done! Your playlists and music will be automatically transferred to your Spotify account."
-                    imgSource2={stepsContent3}
+                    animationData={stepsContent3}
                 />
             </div>
         </div>
