@@ -1,11 +1,10 @@
 import StepsCard from './Card';
-import stepOne from './assets/1.png';
-import Lottie from 'lottie-react'
-import stepContent1 from './assets/connection.json'
-import stepTwo from './assets/2.png';
-import stepsContent2 from './assets/pick.json';
-import stepThree from './assets/3.png';
-import stepsContent3 from './assets/ready.json';
+import stepOne from '../../assets/1.png';
+import stepContent1 from '../../assets/connection.json'
+import stepTwo from '../../assets/2.png';
+import stepsContent2 from '../../assets/pick.json';
+import stepThree from '../../assets/3.png';
+import stepsContent3 from '../../assets/ready.json';
 
 function Steps() {
     const containerStyle = {

@@ -1,18 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'react-bootstrap/Image';
-import youtubeLogo from './assets/youtube.png';
-import serverIcon from './assets/serverIcon.png';
 import Lottie from 'lottie-react';
-import animationData from './assets/Animation - 1712301816131.json';
 
-function StepsCard() {
+function InfoContainer({ icon1, icon2, animationData, textContent }) {
   const [isHovered, setIsHovered] = useState(false);
-  const [paragraphShown, setParagraphShown] = useState(false); // Starea care urmărește dacă paragraful a fost arătat sau nu
+  const [paragraphShown, setParagraphShown] = useState(false);
+  const [isVisible, setIsVisible] = useState(false); // Starea care urmărește vizibilitatea paragrafului
   const animationRef = useRef();
   const paragraphRef = useRef();
 
   useEffect(() => {
-    // Oprirea animației când componenta este inițializată
     if (animationRef.current) {
       animationRef.current.pause();
     }
@@ -20,27 +17,40 @@ function StepsCard() {
     const options = {
       root: null,
       rootMargin: '0px',
-      threshold: 1 // Definim pragul la 0.5, ceea ce înseamnă că paragraful va fi considerat vizibil atunci când jumătate din el este vizibil
+      threshold: 0.5 // Definim pragul la 0.5, ceea ce înseamnă că paragraful va fi considerat vizibil atunci când jumătate din el este vizibil
     };
 
     const handleIntersection = (entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           setParagraphShown(true);
+        } else {
+          setParagraphShown(false);
         }
       });
     };
 
     const observer = new IntersectionObserver(handleIntersection, options);
 
-    // Observăm paragraful folosind observerul de intersecție
     if (paragraphRef.current) {
       observer.observe(paragraphRef.current);
     }
 
-    // Curățăm observerul la demontare
     return () => {
       observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const paragraphTop = paragraphRef.current.getBoundingClientRect().top;
+      setIsVisible(paragraphTop < window.innerHeight * 0.8); // Setăm starea de vizibilitate în funcție de poziția paragrafului pe ecran
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -72,7 +82,6 @@ function StepsCard() {
   const picuteContainer = {
     border: '2px solid black',
     padding: '30px',
-    borderRadius: '60px',
     display: 'flex',
     alignItems: 'center',
     flexShrink: '0',
@@ -96,35 +105,30 @@ function StepsCard() {
     top: '50%',
     left: 'calc(100% + 20px)',
     transform: 'translateY(-50%)',
-    opacity: (isHovered || paragraphShown) ? 1 : 0, // Folosim starea paragraphShown pentru a determina dacă paragraful trebuie să fie vizibil
+    opacity: (isHovered || paragraphShown || isVisible) ? 1 : 0,
     transition: 'opacity 0.3s ease',
   };
 
   return (
-    <div style={{ padding: '50px', textAlign: 'center' }}>
-      <h2 style={{ fontSize: '50px', fontFamily: 'sans-serif' }}>How is it working?</h2>
-      <div>
-        <div
-          style={containerStyle}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          <div style={picuteContainer}>
-            <Image src={serverIcon} roundedCircle style={imageStyle} />
-            <Lottie
-              style={imageStyle}
-              animationData={animationData}
-              lottieRef={animationRef}
-            />
-            <Image src={youtubeLogo} roundedCircle style={imageStyle} />
-            <p ref={paragraphRef} style={paragraphStyle}>
-              The first step is to retrieve data from your YouTube account using the YouTube API. To accomplish this, our platform requests access to your YouTube account, allowing us to extract information about your playlists, favorite videos, and listening preferences. Once we have gathered this data, we process it to present it to you in an accessible manner.
-            </p>
-          </div>
+    <div>
+      <div
+        style={containerStyle}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div style={picuteContainer}>
+          <Image src={icon1} roundedCircle style={imageStyle} />
+          <Lottie
+            style={imageStyle}
+            animationData={animationData}
+            lottieRef={animationRef}
+          />
+          <Image src={icon2} roundedCircle style={imageStyle} />
+          <p ref={paragraphRef} style={paragraphStyle}> {textContent} </p>
         </div>
       </div>
     </div>
   );
 }
 
-export default StepsCard;
+export default InfoContainer;

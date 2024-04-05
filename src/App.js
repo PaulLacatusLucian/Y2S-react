@@ -1,11 +1,13 @@
-import Header from './Header'
-import Body from './Body'
+import Header from './Header/Header'
+import Body from './Body/Body'
+import Footer from './Footer/Footer'
 
 function App() {
   return(
     <>
       <Header/>
       <Body></Body>
+      <Footer></Footer>
 
     </>
     );

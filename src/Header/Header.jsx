@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
-import logo from './assets/Icon.png';
-import background from './assets/background.jpg';
+import logo from '../assets/Icon.png';
+import background from '../assets/background.jpg';
 import './Header.css'; 
 
 function Header() {
@@ -88,7 +88,7 @@ function Header() {
                     <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                         <Nav>
                             <Nav.Link href="#home">Home</Nav.Link>
-                            <Nav.Link href="#features">Features</Nav.Link>
+                            <Nav.Link href="#features">Steps</Nav.Link>
                             <Nav.Link href="#informations">Informations</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>

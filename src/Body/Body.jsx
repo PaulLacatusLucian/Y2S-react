@@ -1,6 +1,6 @@
 import React from 'react';
-import Steps from './Steps';
-import Informations from './Informations';
+import Steps from './StepsContainer/Steps';
+import Informations from './InformationsContainers/Informations';
 
 const bodyContainerStyle = {
     marginTop: '100px', 

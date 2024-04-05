@@ -7,7 +7,6 @@ function StepsCard(props) {
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    // Oprirea animației când componenta este inițializată
     if (animationRef.current) {
       animationRef.current.pause();
     }
