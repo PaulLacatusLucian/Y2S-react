@@ -1,18 +1,21 @@
 .button {
-    display: block;
-    margin: 0 auto;
-    margin-top: 50px;
-    padding: 10px 20px;
-    font-size: 30px;
-    background-color: #abb3ba;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  display: block;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 10px 20px;
+  font-size: 30px;
+  background-color: #abb3ba;
+  width: 100%;
+  max-width: 300px;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .button:hover {
-    background-color: #73808c;
-    box-shadow: 0 0 20px #fff, 0 0 30px #73808c, 0 0 40px #73808c, 0 0 50px #73808c; 
+  background-color: #73808c;
+  box-shadow: 0 0 20px #fff, 0 0 30px #73808c, 0 0 40px #73808c,
+    0 0 50px #73808c;
 }

@@ -87,7 +87,7 @@ function Header() {
                     <Navbar.Toggle onClick={toggleMenu} aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                         <Nav>
-                        <Nav.Link active={window.scrollY > 10} href="#home">Home</Nav.Link>
+                            <Nav.Link active={window.scrollY > 10} href="#home">Home</Nav.Link>
                             <Nav.Link href="#features">Steps</Nav.Link>
                             <Nav.Link href="#informations">Informations</Nav.Link>
                         </Nav>
