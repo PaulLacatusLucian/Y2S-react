@@ -1,0 +1,23 @@
+.playlist-container {
+    max-width: 1200px; /* Ajustează dimensiunea containerului la nevoie */
+    margin: 0 auto;
+  }
+  
+  .playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 coloane egale */
+    grid-gap: 20px; /* Spațiu între elemente */
+  }
+  
+  .playlist-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .playlist-item img {
+    max-width: 100%;
+    height: auto;
+  }
+  
