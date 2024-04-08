@@ -15,6 +15,7 @@ const MainComponent = () => {
     const [spotifyAuthenticated, setSpotifyAuthenticated] = useState(false);
     const [animationPlayed, setAnimationPlayed] = useState(false);
 
+
     const toggleOverlay = () => {
         setShowOverlay(!showOverlay);
     };
@@ -35,13 +36,14 @@ const MainComponent = () => {
             const authUrl = response.data.auth_url;
             window.location.href = authUrl; // Navighează către URL-ul de autentificare Spotify
             setSpotifyAuthenticated(true);
-            console.log(spotifyAuthenticated);
             setAnimationPlayed(true); // Setează animationPlayed la true după ce s-a autentificat
         } catch (error) {
             console.error('Error authenticating with Spotify:', error);
             setSpotifyAuthenticated(false);
         }
     };
+    
+    
     
     
     
