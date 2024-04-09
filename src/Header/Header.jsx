@@ -4,16 +4,17 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import logo from '../assets/Icon.png';
 import background from '../assets/background.jpg';
-import './Header.css'; 
+import './Header.css';
+import MainComponent from '../Process/MainComponent/MainComponent';
 
 function Header() {
-
     const [navBackground, setNavBackground] = useState('transparent');
     const [menuOpen, setMenuOpen] = useState(false);
+    const [showOverlay, setShowOverlay] = useState(false);
 
     const logoStyle = {
-        maxHeight: '50px', 
-        marginRight: '10px', 
+        maxHeight: '50px',
+        marginRight: '10px',
     };
 
     const navbarStyle = {
@@ -39,24 +40,24 @@ function Header() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        minHeight: '500px', 
-        padding: '50px 0 20px', 
+        minHeight: '500px',
+        padding: '50px 0 20px',
     };
 
     const h2Style = {
-        fontSize: '50px', 
-        textAlign: 'center', 
+        fontSize: '50px',
+        textAlign: 'center',
         textTransform: 'uppercase',
         lineHeight: '1.5',
         margin: '0',
-        color: "white",
+        color: 'white',
         fontFamily: 'Sans-serif',
-        fontWeight: 'bold', 
+        fontWeight: 'bold',
     };
 
     const handleScroll = () => {
         const currentScrollPos = window.pageYOffset;
-        const changePoint =  75;
+        const changePoint = 75;
 
         if (currentScrollPos < changePoint) {
             setNavBackground('transparent');
@@ -67,6 +68,10 @@ function Header() {
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
+    };
+
+    const toggleOverlay = () => {
+        setShowOverlay(!showOverlay);
     };
 
     useEffect(() => {
@@ -81,13 +86,15 @@ function Header() {
             <Navbar style={navbarStyle} variant="dark" expand="lg">
                 <Container fluid>
                     <Navbar.Brand href="#home">
-                        <img style={logoStyle} src={logo} alt="Site Logo"></img>
+                        <img style={logoStyle} src={logo} alt="Site Logo" />
                         YoutubeToSpotify
                     </Navbar.Brand>
                     <Navbar.Toggle onClick={toggleMenu} aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                         <Nav>
-                            <Nav.Link active={window.scrollY > 10} href="#home">Home</Nav.Link>
+                            <Nav.Link active={window.scrollY > 10} href="#home">
+                                Home
+                            </Nav.Link>
                             <Nav.Link href="#features">Steps</Nav.Link>
                             <Nav.Link href="#informations">Informations</Nav.Link>
                         </Nav>
@@ -95,8 +102,15 @@ function Header() {
                 </Container>
             </Navbar>
             <div style={contentStyle}>
-                <h2 style={h2Style}>Transfer your music from <br /> YouTube to Spotify</h2>
-                <button className="button">Try it out now</button>
+                <h2 style={h2Style}>
+                    Transfer your music from <br /> YouTube to Spotify
+                </h2>
+                {/* Toggle button for OverlayComponent */}
+                <button className="button" onClick={toggleOverlay}>
+                    {showOverlay ? 'Hide' : 'Try it out now'}
+                </button>
+                {/* Render OverlayComponent conditionally based on showOverlay state */}
+                {showOverlay && <MainComponent showOverlay={showOverlay} toggleOverlay={toggleOverlay} />}
             </div>
         </header>
     );
