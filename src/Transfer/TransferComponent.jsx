@@ -9,7 +9,10 @@ const TransferOverlay = (props) => {
 
     const startTransfer = async () => {
         try {
-            const response = await axios.post('make_transfer/', {
+            console.log('Starting transfer...');
+            console.log('Youtube playlist id:', props.youtubePlaylistId);
+            console.log('Spotify playlist id:', props.spotifyPlaylistId);
+            const response = await axios.post('http://127.0.0.1:8000/make_transfer/', {
                 youtube_playlist_id: props.youtubePlaylistId,
                 spotify_playlist_id: props.spotifyPlaylistId,         
             });
@@ -17,8 +20,6 @@ const TransferOverlay = (props) => {
             if (response.status !== 200) {
                 throw new Error('Network response was not ok');
             }
-
-            console.log(response.data); // Afișează datele primite de la server în consolă
             setAnimationPlayed(true); // Setăm animationPlayed pe true după ce transferul este completat
         } catch (error) {
             console.error('There was an error:', error);

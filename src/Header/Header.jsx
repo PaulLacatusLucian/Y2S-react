@@ -10,7 +10,7 @@ import MainComponent from '../Process/MainComponent/MainComponent';
 function Header() {
     const [navBackground, setNavBackground] = useState('transparent');
     const [menuOpen, setMenuOpen] = useState(false);
-    const [showOverlay, setShowOverlay] = useState(false);
+    const [showMainOverlay, setShowMainOverlay] = useState(false);
 
     const logoStyle = {
         maxHeight: '50px',
@@ -71,7 +71,7 @@ function Header() {
     };
 
     const toggleOverlay = () => {
-        setShowOverlay(!showOverlay);
+        setShowMainOverlay(!showMainOverlay);
     };
 
     useEffect(() => {
@@ -107,10 +107,10 @@ function Header() {
                 </h2>
                 {/* Toggle button for OverlayComponent */}
                 <button className="button" onClick={toggleOverlay}>
-                    {showOverlay ? 'Hide' : 'Try it out now'}
+                    {showMainOverlay ? 'Hide' : 'Try it out now'}
                 </button>
                 {/* Render OverlayComponent conditionally based on showOverlay state */}
-                {showOverlay && <MainComponent showOverlay={showOverlay} toggleOverlay={toggleOverlay} />}
+                {showMainOverlay && <MainComponent showOverlay={showMainOverlay} toggleOverlay={toggleOverlay} />}
             </div>
         </header>
     );

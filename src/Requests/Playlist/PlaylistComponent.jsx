@@ -3,18 +3,33 @@ import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 import axios from 'axios';
 import './PlaylistPickerOverlay.css'; 
-import TransferOverlay from '../../Transfer/TransferComponent'; // Importați componenta TransferOverlay
+import TransferComponent from '../../Transfer/TransferComponent'; // Importați componenta TransferOverlay
 
 const PlaylistPickerOverlay = ({ onClose }) => {
     const [playlists, setPlaylists] = useState([]);
     const [selectedPlaylistId, setSelectedPlaylistId] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
-    const [showOverlay, setShowOverlay] = useState(true); // Starea pentru controlul afișării overlay-ului
-    const [playlistName, setPlaylistName] = useState(''); // Starea pentru numele playlistului
-    const [isPrivate, setIsPrivate] = useState(false); // Starea pentru opțiunea de privat/public
-    const [showTransferOverlay, setShowTransferOverlay] = useState(false); // Starea pentru controlul vizibilității TransferOverlay
-    let createdPlaylistId = 0;
+    const [showPlaylistOverlay, setShowPlaylistOverlay] = useState(true); // Starea pentru controlul afișării overlay-ului
+    const [playlistName, setPlaylistName] = useState('');
+    const [isPrivate, setIsPrivate] = useState(false); 
+    const [createdPlaylistId, setCreatedPlaylistId] = useState(0);
+    const [youtubePlaylistId, setYoutubePlaylistId] = useState(0);
+    const [showTransferComponent, setShowTransferComponent] = useState(false); // Starea pentru controlul vizibilității TransferComponent
+
+    useEffect(() => {
+        if (showPlaylistOverlay) {
+            fetchPlaylists();
+        }
+    }, [showPlaylistOverlay]);
+
+    useEffect(() => {
+        if (!showPlaylistOverlay) {
+            setShowTransferComponent(true);
+            console.log('Created playlist:', createdPlaylistId);
+            console.log('Youtube playlist:', youtubePlaylistId);
+        }
+    }, [showPlaylistOverlay, createdPlaylistId, youtubePlaylistId]);
 
     const fetchPlaylists = async () => {
         try {
@@ -28,14 +43,9 @@ const PlaylistPickerOverlay = ({ onClose }) => {
         }
     };
 
-    useEffect(() => {
-        if (showOverlay) {
-            fetchPlaylists();
-        }
-    }, [showOverlay]);
-
     const handlePlaylistSelection = (playlistId) => {
         setSelectedPlaylistId(playlistId);
+        setYoutubePlaylistId(playlistId);
     };
 
     const handleConfirm = async () => {
@@ -44,21 +54,18 @@ const PlaylistPickerOverlay = ({ onClose }) => {
                 playlist_name: playlistName,
                 is_public: !isPrivate,
             });
-            createdPlaylistId = response.data.playlist_id;
-            console.log('Playlist created successfully with ID:', response.data.playlist_id);
-            setShowTransferOverlay(true); // Afișează TransferOverlay după închiderea overlay-ului
-            if (onClose && typeof onClose === 'function') {
-                setShowOverlay(false); // Închide overlay-ul când confirmăm crearea playlist-ului
-                onClose(); // Apelăm funcția onClose pentru a închide overlay-ul în componenta părinte
+            if (response.status === 200) {
+                setCreatedPlaylistId(response.data.playlist_id);
+                setShowPlaylistOverlay(false);
             }
         } catch (error) {
             console.error('Error creating playlist:', error);
         }
     };
-    
+
     return (
         <div>
-            <div className={`overlay-container ${showOverlay ? 'show' : ''}`}>
+            <div className={`overlay-container ${showPlaylistOverlay ? 'show' : ''}`}>
                 <div className="playlistOverlay">
                     <div className="playlistOverlay-header">
                         <h1>Select a playlist</h1>
@@ -98,17 +105,14 @@ const PlaylistPickerOverlay = ({ onClose }) => {
                         </label>
                     </div>
                     <div className="playlistOverlay-footer">
-                        {/* Butonul care apelează funcția handleConfirm la click */}
                         <Button variant="primary" onClick={handleConfirm} disabled={!selectedPlaylistId}>Confirm</Button>
                     </div>
                 </div>
             </div>
-            {/* Renderizăm TransferOverlay condițional bazat pe starea showTransferOverlay */}
-            {showTransferOverlay && <TransferOverlay
-                    youtubePlaylistId={selectedPlaylistId}
-                    spotifyPlaylistId={createdPlaylistId}
-                    onClose={() => setShowTransferOverlay(false)}
-                                                    />}
+            {showTransferComponent && <TransferComponent
+                youtubePlaylistId={youtubePlaylistId}
+                spotifyPlaylistId={createdPlaylistId}
+            />}
         </div>
     );
 };

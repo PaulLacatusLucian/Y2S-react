@@ -65,9 +65,9 @@ const MainComponent = ({ showOverlay, toggleOverlay }) => {
     };
 
     const handlePlaylistPickerClose = () => {
-        setShowPlaylistComponent(false);
+        // setShowPlaylistComponent(false);
         setPlaylistPicked(true);
-        toggleOverlay(); // Adăugați această linie pentru a închide MainComponent după ce playlist-ul este selectat
+        toggleOverlay(); 
     };
 
     return (
