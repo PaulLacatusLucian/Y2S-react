@@ -81,6 +81,20 @@ function Header() {
         };
     }, []);
 
+    const handleStepsClick = () => {
+        window.scrollTo({
+            top: window.pageYOffset = 450,
+            behavior: 'smooth' 
+        });
+    };
+
+    const handleInfoClick = () => {
+        window.scrollTo({
+            top: window.pageYOffset = 1300,
+            behavior: 'smooth' 
+        });
+    };
+
     return (
         <header style={headerStyle}>
             <Navbar style={navbarStyle} variant="dark" expand="lg">
@@ -92,11 +106,11 @@ function Header() {
                     <Navbar.Toggle onClick={toggleMenu} aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                         <Nav>
-                            <Nav.Link active={window.scrollY > 10} href="#home">
+                            <Nav.Link  href="#home">
                                 Home
                             </Nav.Link>
-                            <Nav.Link href="#features">Steps</Nav.Link>
-                            <Nav.Link href="#informations">Informations</Nav.Link>
+                            <Nav.Link onClick={handleStepsClick}>Steps</Nav.Link>
+                            <Nav.Link onClick={handleInfoClick}>Informations</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
@@ -105,11 +119,9 @@ function Header() {
                 <h2 style={h2Style}>
                     Transfer your music from <br /> YouTube to Spotify
                 </h2>
-                {/* Toggle button for OverlayComponent */}
                 <button className="button" onClick={toggleOverlay}>
                     {showMainOverlay ? 'Hide' : 'Try it out now'}
                 </button>
-                {/* Render OverlayComponent conditionally based on showOverlay state */}
                 {showMainOverlay && <MainComponent showOverlay={showMainOverlay} toggleOverlay={toggleOverlay} />}
             </div>
         </header>

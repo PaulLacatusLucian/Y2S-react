@@ -57,11 +57,17 @@ const PlaylistPickerOverlay = ({ onClose }) => {
             if (response.status === 200) {
                 setCreatedPlaylistId(response.data.playlist_id);
                 setShowPlaylistOverlay(false);
+                document.querySelector('.playlistOverlay').style.opacity = '0';
             }
         } catch (error) {
             console.error('Error creating playlist:', error);
         }
     };
+
+    const handleClose = () => {
+        setShowTransferComponent(false);
+        onClose();
+    } 
 
     return (
         <div>
@@ -112,6 +118,7 @@ const PlaylistPickerOverlay = ({ onClose }) => {
             {showTransferComponent && <TransferComponent
                 youtubePlaylistId={youtubePlaylistId}
                 spotifyPlaylistId={createdPlaylistId}
+                onClose={handleClose}
             />}
         </div>
     );

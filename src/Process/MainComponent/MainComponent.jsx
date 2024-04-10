@@ -54,7 +54,7 @@ const MainComponent = ({ showOverlay, toggleOverlay }) => {
     const pickPlaylist = (confirmed) => {
         if (confirmed && youtubeAuthenticated && spotifyAuthenticated) {
             setAnimationPlayed(true);
-            setShowPlaylistComponent(true); // Arată PlaylistComponent când este selectat un playlist
+            setShowPlaylistComponent(true); 
         } else {
             if (!youtubeAuthenticated) {
                 alert('You need to authenticate with YouTube first!');
@@ -65,7 +65,7 @@ const MainComponent = ({ showOverlay, toggleOverlay }) => {
     };
 
     const handlePlaylistPickerClose = () => {
-        // setShowPlaylistComponent(false);
+        setShowPlaylistComponent(false);
         setPlaylistPicked(true);
         toggleOverlay(); 
     };
